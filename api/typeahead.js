@@ -37,7 +37,8 @@ module.exports = function(req, res) {
     var datatype = data.queryresult.datatypes;
     var success = data.queryresult.success;
     var error = data.queryresult.success;
-    if (datatype !== "Financial" || !success || error) {
+    if (datatype !== "Financial" || !success) {
+      console.log("Query failed");
       res.json([{
         title: '<i>(no results)</i>',
         text: ''
