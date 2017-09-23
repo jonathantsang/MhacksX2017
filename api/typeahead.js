@@ -18,27 +18,29 @@ module.exports = function(req, res) {
   url ='http://api.wolframalpha.com/v2/query?input=' + term + '&output=JSON' + '&appid=' + key;
   console.log(url);
   request(url, function(err, response) {
-    if (err || response.statusCode !== 200 || !response.body || !response.body.data) {
+    if (err || response.statusCode !== 200 || !response.body) {
+      console.log('Typeahead got error', err);
       res.status(500).send('Error');
       return;
     }
+    console.log('Typeahead did not got error');
 
-    var results = response.body.data;
-    
+    // var results = response.body.data;
+
     var data = JSON.parse(response.body);
     var pods = data.queryresult.pods;
     var interpret = pods.find((obj) => {return obj.title==='Input interpretation'});
     var img = interpret.subpods[0].img.src
-    console.log(results == null);
-    console.log(JSON.parse(results));
-    if (results.length === 0) {
+    console.log(img);
+    if (!img) {
       res.json([{
         title: '<i>(no results)</i>',
         text: ''
       }]);
     } else {
+      console.log('Success!');
       res.json([{
-        title: '<img src='+img+'></img>'
+        title: '<img src='+img+'></img>',
         text: 'Stock'
       }]);
     }
