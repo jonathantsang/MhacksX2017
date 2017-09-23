@@ -24,6 +24,11 @@ module.exports = function(req, res) {
     }
 
     var results = response.body.data;
+    
+    var data = JSON.parse(response.body);
+    var pods = data.queryresult.pods;
+    var interpret = pods.find((obj) => {return obj.title==='Input interpretation'});
+    var img = interpret.subpods[0].img.src
     console.log(results == null);
     console.log(JSON.parse(results));
     if (results.length === 0) {
@@ -32,7 +37,10 @@ module.exports = function(req, res) {
         text: ''
       }]);
     } else {
-      res.json(results);
+      res.json([{
+        title: '<img src='+img+'></img>'
+        text: 'Stock'
+      }]);
     }
   });
 

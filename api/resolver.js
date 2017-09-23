@@ -29,7 +29,7 @@ function handleSearchString(term, req, res) {
     var data = JSON.parse(response.body);
 
     var pods = data.queryresult.pods;
-    var ph = pods.find((obj) => {return obj.title=='Price history'});
+    var ph = pods.find((obj) => {return obj.title==='Price history'});
     var img = ph.subpods[0].img.src
 
     console.log(img);
