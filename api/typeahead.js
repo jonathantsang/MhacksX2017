@@ -47,46 +47,51 @@ module.exports = function(req, res) {
       return;
     }
     console.log('Typeahead did not got error');
-    var pods = data.queryresult.pods;
-    var interpret = pods.find((obj) => {return obj.title==='Input interpretation'});
-    var imgint = interpret.subpods[0].img.src
+
+    try {
+        var pods = data.queryresult.pods;
+        var interpret = pods.find((obj) => {return obj.title==='Input interpretation'});
+        var imgint = interpret.subpods[0].img.src
+        
+        if (type === "default") {
+          console.log(type);
     
-    if (type === "default") {
-      console.log(type);
-
-      var ph = pods.find((obj) => {return obj.title==='Price history'});
-      var img = ph.subpods[0].img.src;
-
-      console.log(img);
-      if (!img) {
-        res.json([{
-          title: '<i>(no results)</i>',
-          text: ''
-        }]);
-      } else {
-        console.log('Success!');
-        res.json([{
-          title: '<img src='+imgint+'></img>',
-          text: img
-        }]);
-      }
-    } else if (type === "fromTo") {
-      console.log(type);
-      var hist = pods.find((obj) => {return obj.title==='History'});
-      var img = hist.subpods[0].img.src;
-      console.log(img);
-      if (!img) {
-        res.json([{
-          title: '<i>(no results)</i>',
-          text: ''
-        }]);
-      } else {
-        console.log('Success!');
-        res.json([{
-          title: '<img src='+imgint+'></img>',
-          text: img
-        }]);
-      }
+          var ph = pods.find((obj) => {return obj.title==='Price history'});
+          var img = ph.subpods[0].img.src;
+    
+          console.log(img);
+          if (!img) {
+            res.json([{
+              title: '<i>(no results)</i>',
+              text: ''
+            }]);
+          } else {
+            console.log('Success!');
+            res.json([{
+              title: '<img src='+imgint+'></img>',
+              text: img
+            }]);
+          }
+        } else if (type === "fromTo") {
+          console.log(type);
+          var hist = pods.find((obj) => {return obj.title==='History'});
+          var img = hist.subpods[0].img.src;
+          console.log(img);
+          if (!img) {
+            res.json([{
+              title: '<i>(no results)</i>',
+              text: ''
+            }]);
+          } else {
+            console.log('Success!');
+            res.json([{
+              title: '<img src='+imgint+'></img>',
+              text: img
+            }]);
+          }
+        }
+    } catch(err) {
+      console.log(err);
     }
   });
 
