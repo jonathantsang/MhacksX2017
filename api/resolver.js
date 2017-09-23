@@ -16,6 +16,7 @@ function handleSearchString(term, req, res) {
     qs: {
       input: term,
       appid: key,
+      format: 'image,plaintext',
       output : 'JSON'
     },
     timeout: 15 * 1000
@@ -26,10 +27,15 @@ function handleSearchString(term, req, res) {
     }
 
     var data = JSON.parse(response.body);
-    console.log(data);
+
+    var pods = data.queryresult.pods;
+    var ph = pods.find((obj) => {return obj.title=='Price history'});
+    var img = ph.subpods[0].img.src
+
+    console.log(img);
     // Cap at 600px wide
     var width = '100%'
-    var html = '<img style="max-width:100%;" src="' + data + '" width="' + width + '"/>';
+    var html = '<img style="max-width:100%;" src="' + img + '" width="' + width + '"/>';
     res.json({
       body: html
         // Add raw:true if you're returning content that you want the user to be able to edit
