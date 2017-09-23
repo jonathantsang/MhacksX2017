@@ -14,14 +14,15 @@ module.exports = function(req, res) {
     return;
   }
 
+  /* Type of input */
   var type = "";
 
   console.log(term);
+
   var spt = term.split(" ")
   if (spt.length !== 1) {
-
-    if (spt[1].toLowerCase() == "from") {
-      spt.splice(1, 0, "stock");
+    if (spt.find("from")) {
+      // spt.splice(1, 0, "stock");
       type = "fromTo";
     }
   } else {
@@ -38,7 +39,7 @@ module.exports = function(req, res) {
     var success = data.queryresult.success;
     var error = data.queryresult.success;
     if (datatype !== "Financial" || !success) {
-      console.log("Query failed");
+      console.log("Query failed: not financial data or unsuccessful query");
       res.json([{
         title: '<i>(no results)</i>',
         text: ''
@@ -50,7 +51,7 @@ module.exports = function(req, res) {
       res.status(500).send('Error');
       return;
     }
-    console.log('Typeahead did not got error');
+    console.log('Typeahead did not get error');
 
     try {
         console.log(type);
