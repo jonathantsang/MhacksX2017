@@ -91,7 +91,7 @@ module.exports = function(req, res) {
           } else {
             console.log('Successful ', type, ' with term ', term);
             res.json([{
-              title: '<img style="height:75px" src='+imgint+'></img>',
+              title: '<img style="width:100%" src='+imgint+'></img>',
               text: img
             }]);
           }
@@ -110,7 +110,7 @@ module.exports = function(req, res) {
           } else {
             console.log('Successful ', type, ' with term ', term);
             res.json([{
-              title: '<img style="height:75px" src='+imgint+'></img>',
+              title: '<img style="width:100%" src='+imgint+'></img>',
               text: img
             }]);
           }
@@ -128,7 +128,7 @@ module.exports = function(req, res) {
           } else {
             console.log('Successful ', type, ' with term ', term);
             res.json([{
-              title: '<img style="height:75px" src='+imgint+'></img>',
+              title: '<img style="width:100%" src='+imgint+'></img>',
               text: img
             }]);
           }
