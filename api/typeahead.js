@@ -13,7 +13,21 @@ module.exports = function(req, res) {
     }]);
     return;
   }
+
+  var type = "";
+
   console.log(term);
+  var split = term.split(" ")
+  if (split.length !== 1) {
+
+    if (split[1].toLowerCase() == "from") {
+      split.splice(1, 0, "stock");
+      type = "fromTo";
+    }
+  } else {
+    type = "default";
+  }
+  term = split.join('+');
 
   url ='http://api.wolframalpha.com/v2/query?input=' + term + '&output=JSON' + '&appid=' + key;
   console.log(url);
@@ -33,26 +47,46 @@ module.exports = function(req, res) {
       return;
     }
     console.log('Typeahead did not got error');
-
     var pods = data.queryresult.pods;
     var interpret = pods.find((obj) => {return obj.title==='Input interpretation'});
     var imgint = interpret.subpods[0].img.src
+    
+    if (type === "default") {
+      console.log(type);
 
-    var ph = pods.find((obj) => {return obj.title==='Price history'});
-    var img = ph.subpods[0].img.src
+      var ph = pods.find((obj) => {return obj.title==='Price history'});
+      var img = ph.subpods[0].img.src;
 
-    console.log(img);
-    if (!img) {
-      res.json([{
-        title: '<i>(no results)</i>',
-        text: ''
-      }]);
-    } else {
-      console.log('Success!');
-      res.json([{
-        title: '<img src='+imgint+'></img>',
-        text: img
-      }]);
+      console.log(img);
+      if (!img) {
+        res.json([{
+          title: '<i>(no results)</i>',
+          text: ''
+        }]);
+      } else {
+        console.log('Success!');
+        res.json([{
+          title: '<img src='+imgint+'></img>',
+          text: img
+        }]);
+      }
+    } else if (type === "fromTo") {
+      console.log(type);
+      var hist = pods.find((obj) => {return obj.title==='History'});
+      var img = hist.subpods[0].img.src;
+      console.log(img);
+      if (!img) {
+        res.json([{
+          title: '<i>(no results)</i>',
+          text: ''
+        }]);
+      } else {
+        console.log('Success!');
+        res.json([{
+          title: '<img src='+imgint+'></img>',
+          text: img
+        }]);
+      }
     }
   });
 
