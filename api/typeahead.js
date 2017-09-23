@@ -45,7 +45,7 @@ module.exports = function(req, res) {
     type = "default";
   }
   term = spt.join('+');
-  console.log("TYPE ", type" WITH OUT TERM:", term);
+  console.log("TYPE ", type, " WITH OUT TERM:", term);
 
   /* Calling Wolfram API now */
   url ='http://api.wolframalpha.com/v2/query?input=' + term + '&output=JSON' + '&appid=' + key;
