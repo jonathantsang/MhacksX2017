@@ -28,6 +28,7 @@ module.exports = function(req, res) {
     type = "default";
   }
   term = split.join('+');
+  console.log(term);
 
   url ='http://api.wolframalpha.com/v2/query?input=' + term + '&output=JSON' + '&appid=' + key;
   console.log(url);
