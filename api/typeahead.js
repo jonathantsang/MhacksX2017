@@ -24,13 +24,13 @@ module.exports = function(req, res) {
   if (spt.length !== 1) {
 
     /* found "From"  */
-    if (spt.indexOf("from") !== -1) {
+    if (spt.includes('from')) {
       // spt.splice(1, 0, "stock");
       type = "fromTo";
-    } else if (spt.indexOf(',') !== -1 || spt.indexOf('|') !== -1 || spt.indexOf('and') !== -1) {
+    } else if (type.includes(',') || type.includes('|') || spt.includes('and')) {
       type = "multiDefault";
     } else {
-      console.log("oh crapp");
+      console.log("oh crapp its going down");
       res.json([{
         title: '<i>(no results)</i>',
         text: ''
