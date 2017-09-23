@@ -18,6 +18,15 @@ module.exports = function(req, res) {
   url ='http://api.wolframalpha.com/v2/query?input=' + term + '&output=JSON' + '&appid=' + key;
   console.log(url);
   request(url, function(err, response) {
+    var data = JSON.parse(response.body);
+    var datatype = data.queryresult.datatypes;
+    if (datatype !== "Financial") {
+      res.json([{
+        title: '<i>(no results)</i>',
+        text: ''
+      }]);
+      return;
+    }
     if (err || response.statusCode !== 200 || !response.body) {
       console.log('Typeahead got error', err);
       res.status(500).send('Error');
@@ -25,9 +34,6 @@ module.exports = function(req, res) {
     }
     console.log('Typeahead did not got error');
 
-    // var results = response.body.data;
-
-    var data = JSON.parse(response.body);
     var pods = data.queryresult.pods;
     var interpret = pods.find((obj) => {return obj.title==='Input interpretation'});
     var img = interpret.subpods[0].img.src

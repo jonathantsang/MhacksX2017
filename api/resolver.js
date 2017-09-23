@@ -25,7 +25,7 @@ function handleSearchString(term, req, res) {
       res.status(500).send('Error');
       return;
     }
-
+    console.log(term);
     var data = JSON.parse(response.body);
 
     var pods = data.queryresult.pods;
