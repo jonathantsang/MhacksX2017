@@ -13,9 +13,10 @@ module.exports = function(req, res) {
     }]);
     return;
   }
+  console.log(term);
 
   request({
-    url: 'http://api.wolframalpha.com/v2/query',
+    url: 'http://api.wolframalpha.com/v2/query?',
     qs: {
       input: term,
       appid: key
@@ -30,8 +31,8 @@ module.exports = function(req, res) {
     }
 
     var results = response.body.data;
-      console.log(results);
-
+    console.log(results == null);
+    console.log(JSON.parse(results));
     if (results.length === 0) {
       res.json([{
         title: '<i>(no results)</i>',
