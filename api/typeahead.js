@@ -15,16 +15,9 @@ module.exports = function(req, res) {
   }
   console.log(term);
 
-  request({
-    url: 'http://api.wolframalpha.com/v2/query?',
-    qs: {
-      input: term,
-      appid: key
-    },
-    output: 'JSON',
-    format: 'image',
-    timeout: 10 * 1000
-  }, function(err, response) {
+  url ='http://api.wolframalpha.com/v2/query?input=' + term + '&output=JSON' + '&appid=' + key;
+  console.log(url);
+  request(url, function(err, response) {
     if (err || response.statusCode !== 200 || !response.body || !response.body.data) {
       res.status(500).send('Error');
       return;

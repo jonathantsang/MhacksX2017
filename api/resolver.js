@@ -15,9 +15,9 @@ function handleSearchString(term, req, res) {
     url: 'http://api.wolframalpha.com/v2/query?',
     qs: {
       input: term,
-      appid: key
+      appid: key,
+      output : 'JSON'
     },
-    output : 'JSON',
     timeout: 15 * 1000
   }, function(err, response) {
     if (err) {
@@ -25,8 +25,7 @@ function handleSearchString(term, req, res) {
       return;
     }
 
-    var data = response.body.data;
-    console.log(data == null);
+    var data = JSON.parse(response.body);
     console.log(data);
     // Cap at 600px wide
     var width = '100%'
