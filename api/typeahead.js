@@ -27,7 +27,11 @@ module.exports = function(req, res) {
     if (spt.includes('from')) {
       // spt.splice(1, 0, "stock");
       type = "fromTo";
-    } else if (type.includes(',') || type.includes('|') || spt.includes('and')) {
+    } else if (type.includes(',')) {
+      type = "multiDefault";
+    } else if (type.includes('|')) {
+      type = "multiDefault";
+    } else if (spt.includes('and')) {
       type = "multiDefault";
     } else {
       console.log("oh crapp its going down");
