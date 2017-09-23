@@ -92,6 +92,10 @@ module.exports = function(req, res) {
         }
     } catch(err) {
       console.log(err);
+      res.json([{
+        title: '<i>(no results)</i>',
+        text: ''
+      }]);
     }
   });
 
