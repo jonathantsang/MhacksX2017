@@ -36,7 +36,11 @@ module.exports = function(req, res) {
 
     var pods = data.queryresult.pods;
     var interpret = pods.find((obj) => {return obj.title==='Input interpretation'});
-    var img = interpret.subpods[0].img.src
+    var imgint = interpret.subpods[0].img.src
+
+    var ph = pods.find((obj) => {return obj.title==='Price history'});
+    var img = ph.subpods[0].img.src
+
     console.log(img);
     if (!img) {
       res.json([{
@@ -46,8 +50,8 @@ module.exports = function(req, res) {
     } else {
       console.log('Success!');
       res.json([{
-        title: '<img src='+img+'></img>',
-        text: 'Stock'
+        title: '<img src='+imgint+'></img>',
+        text: img
       }]);
     }
   });

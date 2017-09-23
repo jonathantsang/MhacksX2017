@@ -11,34 +11,44 @@ module.exports = function(req, res) {
 };
 
 function handleSearchString(term, req, res) {
-  request({
-    url: 'http://api.wolframalpha.com/v2/query?',
-    qs: {
-      input: term,
-      appid: key,
-      format: 'image,plaintext',
-      output : 'JSON'
-    },
-    timeout: 15 * 1000
-  }, function(err, response) {
-    if (err) {
-      res.status(500).send('Error');
-      return;
-    }
-    console.log(term);
-    var data = JSON.parse(response.body);
+  // request({
+  //   url: 'http://api.wolframalpha.com/v2/query?',
+  //   qs: {
+  //     input: term,
+  //     appid: key,
+  //     format: 'image,plaintext',
+  //     output : 'JSON'
+  //   },
+  //   timeout: 15 * 1000
+  // }, function(err, response) {
+  //   if (err) {
+  //     res.status(500).send('Error');
+  //     return;
+  //   }
+  //   console.log(term);
+  //   var data = JSON.parse(response.body);
 
-    var pods = data.queryresult.pods;
-    var ph = pods.find((obj) => {return obj.title==='Price history'});
-    var img = ph.subpods[0].img.src
+  //   var pods = data.queryresult.pods;
+  //   if (!pods) return;
+  //   var ph = pods.find((obj) => {return obj.title==='Price history'});
+  //   var img = ph.subpods[0].img.src
 
-    console.log(img);
-    // Cap at 600px wide
-    var width = '100%'
-    var html = '<img style="max-width:100%;" src="' + img + '" width="' + width + '"/>';
-    res.json({
-      body: html
-        // Add raw:true if you're returning content that you want the user to be able to edit
-    });
+  //   console.log(img);
+  //   // Cap at 600px wide
+  //   var width = '100%'
+  //   var html = '<img style="max-width:100%;" src="' + img + '" width="' + width + '"/>';
+  //   res.json({
+  //     body: html
+  //       // Add raw:true if you're returning content that you want the user to be able to edit
+  //   });
+  // });
+
+  // Cap at 600px wide
+  var img = term;
+  var width = '100%'
+  var html = '<img style="max-width:100%;" src="' + img + '" width="' + width + '"/>';
+  res.json({
+    body: html
+      // Add raw:true if you're returning content that you want the user to be able to edit
   });
 }
