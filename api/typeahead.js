@@ -29,7 +29,7 @@ module.exports = function(req, res) {
       type = "fromTo";
     } else if (type.includes(',')) {
       type = "multiDefault";
-    } else if (type.includes('|')) {
+    } else if (spt.includes('|')) {
       type = "multiDefault";
     } else if (spt.includes('and')) {
       type = "multiDefault";
@@ -118,7 +118,7 @@ module.exports = function(req, res) {
         /* MULTIDEFAULT: multiple stocks */
         } else if (type === "multiDefault") {
           var rph = pods.find((obj) => {return obj.title==='Relative price history'});
-          var img = ph.subpods[0].img.src;
+          var img = rph.subpods[0].img.src;
           console.log(img);
           if (!img) {
             res.json([{
