@@ -1,0 +1,7 @@
+
+
+Mixmax Linking
+
+stock graphs(slack-commands): https://wolframstocksearch.herokuapp.com/resolver
+https://wolframstocksearch.herokuapp.com/typeahead
+plotting(link-resolver): https://plotemailgraph.herokuapp.com/resolver 
