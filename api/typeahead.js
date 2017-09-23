@@ -17,17 +17,17 @@ module.exports = function(req, res) {
   var type = "";
 
   console.log(term);
-  var split = term.split(" ")
-  if (split.length !== 1) {
+  var spt = term.split(" ")
+  if (spt.length !== 1) {
 
-    if (split[1].toLowerCase() == "from") {
-      split.splice(1, 0, "stock");
+    if (spt[1].toLowerCase() == "from") {
+      spt.splice(1, 0, "stock");
       type = "fromTo";
     }
   } else {
     type = "default";
   }
-  term = split.join('+');
+  term = spt.join('+');
   console.log(term);
 
   url ='http://api.wolframalpha.com/v2/query?input=' + term + '&output=JSON' + '&appid=' + key;
@@ -52,6 +52,7 @@ module.exports = function(req, res) {
     console.log('Typeahead did not got error');
 
     try {
+        console.log(type);
         var pods = data.queryresult.pods;
         var interpret = pods.find((obj) => {return obj.title==='Input interpretation'});
         var imgint = interpret.subpods[0].img.src
