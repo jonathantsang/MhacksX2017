@@ -45,7 +45,7 @@ module.exports = function(req, res) {
     type = "default";
   }
   term = spt.join('+');
-  console.log("OUT TERM:", term);
+  console.log("TYPE ", type" WITH OUT TERM:", term);
 
   /* Calling Wolfram API now */
   url ='http://api.wolframalpha.com/v2/query?input=' + term + '&output=JSON' + '&appid=' + key;
@@ -89,7 +89,7 @@ module.exports = function(req, res) {
               text: ''
             }]);
           } else {
-            console.log('Successful ', type);
+            console.log('Successful ', type, ' with term ', term);
             res.json([{
               title: '<img src='+imgint+'></img>',
               text: img
@@ -108,7 +108,7 @@ module.exports = function(req, res) {
               text: ''
             }]);
           } else {
-            console.log('Successful ', type);
+            console.log('Successful ', type, ' with term ', term);
             res.json([{
               title: '<img src='+imgint+'></img>',
               text: img
@@ -126,7 +126,7 @@ module.exports = function(req, res) {
               text: ''
             }]);
           } else {
-            console.log('Successful ', type);
+            console.log('Successful ', type, ' with term ', term);
             res.json([{
               title: '<img src='+imgint+'></img>',
               text: img
