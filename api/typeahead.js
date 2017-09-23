@@ -29,6 +29,13 @@ module.exports = function(req, res) {
       type = "fromTo";
     } else if (spt.indexOf(',') !== -1 || spt.indexOf('|') !== -1 || spt.indexOf('and') !== -1) {
       type = "multiDefault";
+    } else {
+      console.log("oh crapp");
+      res.json([{
+        title: '<i>(no results)</i>',
+        text: ''
+      }]);
+      return;
     }
   } else {
     type = "default";
