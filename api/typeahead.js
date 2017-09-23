@@ -17,11 +17,13 @@ module.exports = function(req, res) {
   /* Type of input */
   var type = "";
 
-  console.log(term);
+  console.log("IN TERM: ", term);
 
   var spt = term.split(" ")
   if (spt.length !== 1) {
-    if (spt.find("from")) {
+
+    /* found "From"  */
+    if (spt.indexOf("from") !== -1) {
       // spt.splice(1, 0, "stock");
       type = "fromTo";
     }
@@ -29,10 +31,10 @@ module.exports = function(req, res) {
     type = "default";
   }
   term = spt.join('+');
-  console.log(term);
+  console.log("OUT TERM:", term);
 
   url ='http://api.wolframalpha.com/v2/query?input=' + term + '&output=JSON' + '&appid=' + key;
-  console.log(url);
+  console.log("URL: ", url);
   request(url, function(err, response) {
     var data = JSON.parse(response.body);
     var datatype = data.queryresult.datatypes;
