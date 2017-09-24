@@ -36,7 +36,7 @@ module.exports = function(req, res) {
     } else {
       console.log("oh crapp its going down");
       res.json([{
-        title: '<i>(no results)</i>',
+        title: '<i>Loading.</i>',
         text: ''
       }]);
       return;
@@ -58,7 +58,7 @@ module.exports = function(req, res) {
     if (datatype !== "Financial" || !success) {
       console.log("Query failed: not financial data or unsuccessful query");
       res.json([{
-        title: '<i>(no results)</i>',
+        title: '<i>Loading.</i>',
         text: ''
       }]);
       return;
@@ -85,7 +85,7 @@ module.exports = function(req, res) {
           console.log(img);
           if (!img) {
             res.json([{
-              title: '<i>(no results)</i>',
+              title: '<i>Loading.</i>',
               text: ''
             }]);
           } else {
@@ -104,7 +104,7 @@ module.exports = function(req, res) {
           console.log(img);
           if (!img) {
             res.json([{
-              title: '<i>(no results)</i>',
+              title: '<i>Loading.</i>',
               text: ''
             }]);
           } else {
@@ -122,7 +122,7 @@ module.exports = function(req, res) {
           console.log(img);
           if (!img) {
             res.json([{
-              title: '<i>(no results)</i>',
+              title: '<i>Loading.</i>',
               text: ''
             }]);
           } else {
@@ -137,14 +137,14 @@ module.exports = function(req, res) {
         } else {
           console.log('??? something happen');
           res.json([{
-            title: '<i>(no results)</i>',
+            title: '<i>Loading.</i>',
             text: ''
           }]);
         }
     } catch(err) {
       console.log("Error! ", err);
       res.json([{
-        title: '<i>(no results)</i>',
+        title: '<i>Loading.</i>',
         text: ''
       }]);
     }
