@@ -1,7 +1,7 @@
 {
-  "name": "giphy-example-slash-command",
+  "name": "stock-info-wolfram-slash-command",
   "version": "0.0.1",
-  "description": "Giphy slash command for Mixmax",
+  "description": "stock-info-wolfram-slash-command",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js"
@@ -9,7 +9,6 @@
   "repository": {
     "type": "git"
   },
-  "homepage": "https://github.com/mixmaxhq/giphy-example-slash-command",
   "dependencies": {
     "body-parser": "^1.12.2",
     "cors": "^2.7.1",
