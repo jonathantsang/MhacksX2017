@@ -1,0 +1,6 @@
+/stocks aapl
+
+/stocks amzn and aapl july 2016 to december 2017
+
+plot(0,0)(1,3)
+
